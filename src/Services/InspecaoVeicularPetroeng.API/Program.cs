@@ -1,15 +1,15 @@
+using InspecaoVeicularPetroeng.API.Configuration;
+using InspecaoVeicularPetroeng.API.Helpers;
+using Serilog;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
+DotEnv.Load();
+builder.Services.AddApiConfiguration(builder.Environment);
+builder.Host.UseSerilog();
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-
-app.UseAuthorization();
-
-app.MapControllers();
+app.UseApiConfiguration();
 
 app.Run();
