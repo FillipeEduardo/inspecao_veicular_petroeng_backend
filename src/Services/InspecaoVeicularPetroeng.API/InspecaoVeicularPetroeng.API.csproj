@@ -29,8 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Commands\" />
     <Folder Include="Notifications\" />
     <Folder Include="Validators\" />
     <Folder Include="Queries\" />
