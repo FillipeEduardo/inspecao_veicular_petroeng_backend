@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/BuildingBlocks/" />
+  <Folder Name="/src/BuildingBlocks/Domain/">
+    <Project Path="src/BuildingBlocks/InspecaoVeicularPetroeng.Domain/InspecaoVeicularPetroeng.Domain.csproj" />
+  </Folder>
+  <Folder Name="/src/BuildingBlocks/Infrastructure/">
+    <Project Path="src/BuildingBlocks/InspecaoVeicularPetroeng.Infrastructure/InspecaoVeicularPetroeng.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/BuildingBlocks/Mediator/">
+    <Project Path="src/BuildingBlocks/InspecaoVeicularPetroeng.Mediator/InspecaoVeicularPetroeng.Mediator.csproj" />
+  </Folder>
+  <Folder Name="/src/Services/" />
+  <Folder Name="/src/Services/API/">
+    <Project Path="src/Services/InspecaoVeicularPetroeng.API/InspecaoVeicularPetroeng.API.csproj" />
+  </Folder>
+</Solution>
