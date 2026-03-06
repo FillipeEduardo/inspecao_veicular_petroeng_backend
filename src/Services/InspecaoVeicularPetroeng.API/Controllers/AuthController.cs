@@ -17,4 +17,14 @@ public class AuthController(IMediator mediator) : ControllerBase
             StatusCode = (int)result.HttpStatusCode
         };
     }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login(LoginCommand command)
+    {
+        var result = await mediator.Send(command);
+        return new ObjectResult(result)
+        {
+            StatusCode = (int)result.HttpStatusCode
+        };
+    }
 }

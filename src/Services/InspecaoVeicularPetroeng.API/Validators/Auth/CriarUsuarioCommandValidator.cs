@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using InspecaoVeicularPetroeng.API.Commands.Auth;
 
-namespace InspecaoVeicularPetroeng.API.Validators;
+namespace InspecaoVeicularPetroeng.API.Validators.Auth;
 
 public class CriarUsuarioCommandValidator : AbstractValidator<CriarUsuarioCommand>
 {
