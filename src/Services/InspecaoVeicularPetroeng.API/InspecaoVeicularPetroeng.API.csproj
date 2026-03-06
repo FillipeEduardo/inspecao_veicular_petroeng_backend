@@ -30,7 +30,6 @@
 
   <ItemGroup>
     <Folder Include="Notifications\" />
-    <Folder Include="Validators\" />
     <Folder Include="Queries\" />
   </ItemGroup>
 

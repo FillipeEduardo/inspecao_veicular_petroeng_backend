@@ -1,4 +1,6 @@
-﻿namespace InspecaoVeicularPetroeng.Domain.Entities;
+﻿using InspecaoVeicularPetroeng.Domain.Enums;
+
+namespace InspecaoVeicularPetroeng.Domain.Entities;
 
 public class Usuario
 {
@@ -7,6 +9,5 @@ public class Usuario
     public string Senha { get; set; } = string.Empty;
     public string NomeCompleto { get; set; } = string.Empty;
     public string Telefone { get; set; } = string.Empty;
-    public int PerfilId { get; set; }
-    public Perfil Perfil { get; set; } = null!;
+    public Perfil Perfil { get; set; }
 }

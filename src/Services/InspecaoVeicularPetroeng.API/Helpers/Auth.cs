@@ -28,7 +28,7 @@ public static class Auth
     {
         var ci = new ClaimsIdentity();
         ci.AddClaim(new Claim(ClaimTypes.Email, usuario.Email));
-        ci.AddClaim(new Claim(ClaimTypes.Role, usuario.Perfil.Nome));
+        ci.AddClaim(new Claim(ClaimTypes.Role, usuario.Perfil.ToString()));
         ci.AddClaim(new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()));
         return ci;
     }

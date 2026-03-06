@@ -14,27 +14,31 @@ public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
 
         builder
             .Property(x => x.Email)
-            .HasMaxLength(50);
+            .HasMaxLength(50)
+            .IsRequired();
 
         builder
             .Property(x => x.Senha)
-            .HasMaxLength(100);
+            .HasMaxLength(100)
+            .IsRequired();
 
         builder
             .Property(x => x.NomeCompleto)
-            .HasMaxLength(100);
+            .HasMaxLength(100)
+            .IsRequired();
 
         builder
             .Property(x => x.Telefone)
-            .HasMaxLength(11);
+            .HasMaxLength(11)
+            .IsRequired();
+
+        builder
+            .Property(x => x.Perfil)
+            .HasConversion<int>()
+            .IsRequired();
 
         builder
             .HasIndex(x => x.Email)
             .IsUnique();
-
-        builder
-            .HasOne(x => x.Perfil)
-            .WithMany(x => x.Usuarios)
-            .HasForeignKey(x => x.PerfilId);
     }
 }
