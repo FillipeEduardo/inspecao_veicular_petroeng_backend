@@ -13,6 +13,11 @@ public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
         builder.HasKey(x => x.Id);
 
         builder
+            .Property(x => x.Id)
+            .ValueGeneratedOnAdd()
+            .UseIdentityColumn();
+
+        builder
             .Property(x => x.Email)
             .HasMaxLength(50)
             .IsRequired();
