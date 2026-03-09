@@ -7,4 +7,6 @@ public class Inspecao
     public Vistoria Vistoria { get; set; } = null!;
     public int ItemId { get; set; }
     public Item Item { get; set; } = null!;
+    public int StatusId { get; set; }
+    public StatusInspecao Status { get; set; } = null!;
 }

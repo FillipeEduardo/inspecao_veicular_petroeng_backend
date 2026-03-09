@@ -6,7 +6,15 @@ namespace InspecaoVeicularPetroeng.Infrastructure.Data;
 
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
+    public DbSet<Evidencia> Evidencias { get; set; }
+    public DbSet<Foto> Fotos { get; set; }
+    public DbSet<Inspecao> Inspecoes { get; set; }
+    public DbSet<Item> Itens { get; set; }
+    public DbSet<StatusInspecao> StatusInspecao { get; set; }
+    public DbSet<StatusVistoria> StatusVistoria { get; set; }
     public DbSet<Usuario> Usuarios { get; set; }
+    public DbSet<Veiculo> Veiculos { get; set; }
+    public DbSet<Vistoria> Vistorias { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

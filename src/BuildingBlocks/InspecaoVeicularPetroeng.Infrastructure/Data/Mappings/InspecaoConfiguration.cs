@@ -31,5 +31,10 @@ public class InspecaoConfiguration : IEntityTypeConfiguration<Inspecao>
             .HasOne(x => x.Item)
             .WithMany(x => x.Inspecoes)
             .HasForeignKey(x => x.ItemId);
+
+        builder
+            .HasOne(x => x.Status)
+            .WithMany(x => x.Inspecoes)
+            .HasForeignKey(x => x.StatusId);
     }
 }
