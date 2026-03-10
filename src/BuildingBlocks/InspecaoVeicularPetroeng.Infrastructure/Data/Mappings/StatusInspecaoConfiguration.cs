@@ -23,7 +23,7 @@ public class StatusInspecaoConfiguration : IEntityTypeConfiguration<StatusInspec
             .HasMaxLength(20);
 
         builder
-            .HasIndex()
+            .HasIndex(x => x.Nome)
             .IsUnique();
     }
 }
