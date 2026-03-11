@@ -16,7 +16,11 @@ public class ObterTodosVeiculosQueryHandler(AppDbContext context) : IRequestHand
     {
         var veiculos = await context
             .Veiculos
-            .Select(v => new { v.Id, v.Placa, v.Ano, v.Modelo })
+            .Select(v => new
+            {
+                v.Id, v.Placa, v.Ano, v.Modelo,
+                UltimaVistoria = v.Vistorias!.OrderByDescending(vis => vis.Data).FirstOrDefault()
+            })
             .ToListAsync(cancellationToken);
 
         return new SuccessResult("Consulta efetuada com sucesso.", HttpStatusCode.OK, veiculos);
