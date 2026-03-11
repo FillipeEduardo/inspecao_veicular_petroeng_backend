@@ -23,6 +23,9 @@ public class InspecaoConfiguration : IEntityTypeConfiguration<Inspecao>
             .UseIdentityColumn();
 
         builder
+            .Property(x => x.Observacao);
+
+        builder
             .HasOne(x => x.Vistoria)
             .WithMany(x => x.Inspecoes)
             .HasForeignKey(x => x.VistoriaId);
