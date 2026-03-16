@@ -173,30 +173,6 @@ namespace InspecaoVeicularPetroeng.Infrastructure.Migrations
                     b.ToTable("status_inspecao", (string)null);
                 });
 
-            modelBuilder.Entity("InspecaoVeicularPetroeng.Domain.Entities.StatusVistoria", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
-                        .HasColumnName("nome");
-
-                    b.HasKey("Id")
-                        .HasName("p_k_status_vistoria");
-
-                    b.HasIndex("Nome")
-                        .IsUnique();
-
-                    b.ToTable("status_vistoria", (string)null);
-                });
-
             modelBuilder.Entity("InspecaoVeicularPetroeng.Domain.Entities.Usuario", b =>
                 {
                     b.Property<long>("Id")
@@ -290,17 +266,9 @@ namespace InspecaoVeicularPetroeng.Infrastructure.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("data");
 
-                    b.Property<string>("Observacao")
-                        .HasColumnType("text")
-                        .HasColumnName("observacao");
-
-                    b.Property<int>("QuilometragemVeiculo")
-                        .HasColumnType("integer")
+                    b.Property<double>("QuilometragemVeiculo")
+                        .HasColumnType("double precision")
                         .HasColumnName("quilometragem_veiculo");
-
-                    b.Property<int>("StatusId")
-                        .HasColumnType("integer")
-                        .HasColumnName("status_id");
 
                     b.Property<int>("VeiculoId")
                         .HasColumnType("integer")
@@ -308,9 +276,6 @@ namespace InspecaoVeicularPetroeng.Infrastructure.Migrations
 
                     b.HasKey("Id")
                         .HasName("p_k_vistorias");
-
-                    b.HasIndex("StatusId")
-                        .HasDatabaseName("i_x_vistorias_status_id");
 
                     b.HasIndex("VeiculoId")
                         .HasDatabaseName("i_x_vistorias_veiculo_id");
@@ -366,19 +331,11 @@ namespace InspecaoVeicularPetroeng.Infrastructure.Migrations
 
             modelBuilder.Entity("InspecaoVeicularPetroeng.Domain.Entities.Vistoria", b =>
                 {
-                    b.HasOne("InspecaoVeicularPetroeng.Domain.Entities.StatusVistoria", "Status")
-                        .WithMany("Vistorias")
-                        .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("InspecaoVeicularPetroeng.Domain.Entities.Veiculo", "Veiculo")
                         .WithMany("Vistorias")
                         .HasForeignKey("VeiculoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Status");
 
                     b.Navigation("Veiculo");
                 });
@@ -396,11 +353,6 @@ namespace InspecaoVeicularPetroeng.Infrastructure.Migrations
             modelBuilder.Entity("InspecaoVeicularPetroeng.Domain.Entities.StatusInspecao", b =>
                 {
                     b.Navigation("Inspecoes");
-                });
-
-            modelBuilder.Entity("InspecaoVeicularPetroeng.Domain.Entities.StatusVistoria", b =>
-                {
-                    b.Navigation("Vistorias");
                 });
 
             modelBuilder.Entity("InspecaoVeicularPetroeng.Domain.Entities.Veiculo", b =>
