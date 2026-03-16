@@ -59,6 +59,9 @@ public class CriarVistoriaCommandHandler(AppDbContext context) : IRequestHandler
                 return new ErrorResult(["Um dos status da inspeção não existe."], HttpStatusCode.BadRequest);
         }
 
+        var esseVeiculoExiste = await context.Veiculos.AnyAsync(x => x.Id == request.VeiculoId, cancellationToken);
+        if (!esseVeiculoExiste) return new ErrorResult(["Esse veículo não existe."], HttpStatusCode.BadRequest);
+
         Domain.Entities.Vistoria vistoria = request;
 
         await context.AddAsync(vistoria, cancellationToken);
