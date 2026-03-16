@@ -11,7 +11,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<Inspecao> Inspecoes { get; set; }
     public DbSet<Item> Itens { get; set; }
     public DbSet<StatusInspecao> StatusInspecao { get; set; }
-    public DbSet<StatusVistoria> StatusVistoria { get; set; }
     public DbSet<Usuario> Usuarios { get; set; }
     public DbSet<Veiculo> Veiculos { get; set; }
     public DbSet<Vistoria> Vistorias { get; set; }

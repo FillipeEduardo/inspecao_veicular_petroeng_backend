@@ -26,14 +26,6 @@ public class VistoriaConfiguration : IEntityTypeConfiguration<Vistoria>
             .IsRequired();
 
         builder
-            .Property(x => x.Observacao);
-
-        builder
-            .HasOne(x => x.Status)
-            .WithMany(x => x.Vistorias)
-            .HasForeignKey(x => x.StatusId);
-
-        builder
             .HasOne(x => x.Veiculo)
             .WithMany(x => x.Vistorias)
             .HasForeignKey(x => x.VeiculoId);
