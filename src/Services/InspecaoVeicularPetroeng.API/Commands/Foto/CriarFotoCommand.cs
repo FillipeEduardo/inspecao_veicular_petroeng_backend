@@ -50,14 +50,23 @@ public class CriarFotoCommandHandler(AppDbContext context, IAmazonS3 amazon) : I
 
         await using var stream = request.Foto.OpenReadStream();
 
-        await amazon.PutObjectAsync(new PutObjectRequest
+        try
         {
-            Key = $"{foto.Id}{foto.Extensao}",
-            BucketName = BucketNames.FotosEvidencias,
-            InputStream = stream,
-            ContentType = request.Foto.ContentType
-        }, cancellationToken);
+            await amazon.PutObjectAsync(new PutObjectRequest
+            {
+                Key = $"{foto.Id}{foto.Extensao}",
+                BucketName = BucketNames.FotosEvidencias,
+                InputStream = stream,
+                ContentType = request.Foto.ContentType
+            }, cancellationToken);
 
-        return new SuccessResult("Foto Criada com sucesso.", HttpStatusCode.OK);
+            return new SuccessResult("Foto Criada com sucesso.", HttpStatusCode.OK);
+        }
+        catch
+        {
+            context.Remove(foto);
+            await context.SaveChangesAsync(cancellationToken);
+            return new ErrorResult(["Erro ao salvar a foto no servidor."], HttpStatusCode.InternalServerError);
+        }
     }
 }
