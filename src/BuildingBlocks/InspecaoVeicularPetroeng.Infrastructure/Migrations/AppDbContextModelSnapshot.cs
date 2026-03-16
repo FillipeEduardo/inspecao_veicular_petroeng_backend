@@ -63,12 +63,6 @@ namespace InspecaoVeicularPetroeng.Infrastructure.Migrations
                         .HasColumnType("character varying(10)")
                         .HasColumnName("extensao");
 
-                    b.Property<string>("NomeArquivo")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
-                        .HasColumnName("nome_arquivo");
-
                     b.Property<long>("VistoriaId")
                         .HasColumnType("bigint")
                         .HasColumnName("vistoria_id");

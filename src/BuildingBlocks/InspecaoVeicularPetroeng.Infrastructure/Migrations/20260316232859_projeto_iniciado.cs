@@ -109,7 +109,6 @@ namespace InspecaoVeicularPetroeng.Infrastructure.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    nome_arquivo = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     extensao = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
                     evidencia_id = table.Column<int>(type: "integer", nullable: false),
                     vistoria_id = table.Column<long>(type: "bigint", nullable: false)

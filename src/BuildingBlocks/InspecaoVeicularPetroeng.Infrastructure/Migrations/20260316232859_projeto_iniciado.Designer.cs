@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace InspecaoVeicularPetroeng.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260316143703_projeto_iniciado")]
+    [Migration("20260316232859_projeto_iniciado")]
     partial class projeto_iniciado
     {
         /// <inheritdoc />
@@ -65,12 +65,6 @@ namespace InspecaoVeicularPetroeng.Infrastructure.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("character varying(10)")
                         .HasColumnName("extensao");
-
-                    b.Property<string>("NomeArquivo")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
-                        .HasColumnName("nome_arquivo");
 
                     b.Property<long>("VistoriaId")
                         .HasColumnType("bigint")
