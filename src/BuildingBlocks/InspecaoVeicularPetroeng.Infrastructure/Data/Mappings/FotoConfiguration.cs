@@ -13,11 +13,6 @@ public class FotoConfiguration : IEntityTypeConfiguration<Foto>
         builder.HasKey(x => x.Id);
 
         builder
-            .Property(x => x.NomeArquivo)
-            .IsRequired()
-            .HasMaxLength(50);
-
-        builder
             .Property(x => x.Extensao)
             .IsRequired()
             .HasMaxLength(10);

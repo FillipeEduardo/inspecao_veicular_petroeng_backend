@@ -3,7 +3,6 @@
 public class Foto
 {
     public Guid Id { get; set; }
-    public string NomeArquivo { get; set; } = string.Empty;
     public string Extensao { get; set; } = string.Empty;
     public int EvidenciaId { get; set; }
     public Evidencia Evidencia { get; set; } = null!;
