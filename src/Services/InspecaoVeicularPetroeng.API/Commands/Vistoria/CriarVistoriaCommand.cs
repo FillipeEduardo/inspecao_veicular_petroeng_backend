@@ -11,18 +11,35 @@ public class CriarVistoriaCommand : IRequest<Result>
 {
     public DateTime Data { get; set; }
     public double QuilometragemVeiculo { get; set; }
-    public Domain.Entities.Veiculo Veiculo { get; set; } = null!;
-    public List<Inspecao> Inspecoes { get; set; } = [];
+    public int VeiculoId { get; set; }
+    public List<InspecaoDto> Inspecoes { get; set; } = [];
 
     public static implicit operator Domain.Entities.Vistoria(CriarVistoriaCommand command)
     {
         return new Domain.Entities.Vistoria
         {
-            VeiculoId = command.Veiculo.Id,
+            VeiculoId = command.VeiculoId,
             Data = command.Data,
             QuilometragemVeiculo = command.QuilometragemVeiculo,
-            Inspecoes = command.Inspecoes
+            Inspecoes = command.Inspecoes.Select(x => (Inspecao)x).ToList()
         };
+    }
+
+    public class InspecaoDto
+    {
+        public string? Observacao { get; set; }
+        public int StatusId { get; set; }
+        public int ItemId { get; set; }
+
+        public static implicit operator Inspecao(InspecaoDto dto)
+        {
+            return new Inspecao
+            {
+                ItemId = dto.ItemId,
+                Observacao = dto.Observacao,
+                StatusId = dto.StatusId
+            };
+        }
     }
 }
 
@@ -32,16 +49,14 @@ public class CriarVistoriaCommandHandler(AppDbContext context) : IRequestHandler
     {
         foreach (var inspecao in request.Inspecoes)
         {
-            var existeItemDaInspecao = await context.Itens.AnyAsync(i => i.Id == inspecao.Item.Id, cancellationToken);
+            var existeItemDaInspecao = await context.Itens.AnyAsync(i => i.Id == inspecao.ItemId, cancellationToken);
             if (!existeItemDaInspecao)
                 return new ErrorResult(["Um dos itens da inspeção não existe."], HttpStatusCode.BadRequest);
-            inspecao.ItemId = inspecao.Item.Id;
 
             var existeStatusDaInspecao =
-                await context.StatusInspecao.AnyAsync(st => st.Id == inspecao.Status.Id, cancellationToken);
+                await context.StatusInspecao.AnyAsync(st => st.Id == inspecao.StatusId, cancellationToken);
             if (!existeStatusDaInspecao)
                 return new ErrorResult(["Um dos status da inspeção não existe."], HttpStatusCode.BadRequest);
-            inspecao.StatusId = inspecao.Status.Id;
         }
 
         Domain.Entities.Vistoria vistoria = request;
