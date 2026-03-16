@@ -49,15 +49,6 @@ public class CriarVistoriaCommandHandler(AppDbContext context) : IRequestHandler
         await context.AddAsync(vistoria, cancellationToken);
         await context.SaveChangesAsync(cancellationToken);
 
-        var result = new
-        {
-            vistoria.Id,
-            vistoria.Data,
-            request.Inspecoes,
-            vistoria.QuilometragemVeiculo,
-            vistoria.VeiculoId
-        };
-
-        return new SuccessResult("Vistoria criada com sucesso.", HttpStatusCode.Created);
+        return new SuccessResult("Vistoria criada com sucesso.", HttpStatusCode.Created, vistoria.Id);
     }
 }
