@@ -11,14 +11,14 @@ public class CriarVistoriaCommand : IRequest<Result>
 {
     public DateTime Data { get; set; }
     public double QuilometragemVeiculo { get; set; }
-    public int VeiculoId { get; set; }
+    public Domain.Entities.Veiculo Veiculo { get; set; } = null!;
     public List<Inspecao> Inspecoes { get; set; } = [];
 
     public static implicit operator Domain.Entities.Vistoria(CriarVistoriaCommand command)
     {
         return new Domain.Entities.Vistoria
         {
-            VeiculoId = command.VeiculoId,
+            VeiculoId = command.Veiculo.Id,
             Data = command.Data,
             QuilometragemVeiculo = command.QuilometragemVeiculo,
             Inspecoes = command.Inspecoes

@@ -13,7 +13,7 @@ public class CriarVistoriaCommandValidator : AbstractValidator<CriarVistoriaComm
         RuleFor(x => x.QuilometragemVeiculo)
             .GreaterThanOrEqualTo(0);
 
-        RuleFor(x => x.VeiculoId)
+        RuleFor(x => x.Veiculo.Id)
             .GreaterThan(0);
 
         RuleFor(x => x.Inspecoes)
