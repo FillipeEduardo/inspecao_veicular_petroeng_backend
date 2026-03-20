@@ -75,7 +75,7 @@ namespace InspecaoVeicularPetroeng.Infrastructure.Migrations
                     nome_completo = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     telefone = table.Column<string>(type: "character varying(11)", maxLength: 11, nullable: false),
                     perfil = table.Column<int>(type: "integer", nullable: false),
-                    contrato_id = table.Column<int>(type: "integer", nullable: false)
+                    contrato_id = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -84,8 +84,7 @@ namespace InspecaoVeicularPetroeng.Infrastructure.Migrations
                         name: "FK_usuarios_contratos_contrato_id",
                         column: x => x.contrato_id,
                         principalTable: "contratos",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
