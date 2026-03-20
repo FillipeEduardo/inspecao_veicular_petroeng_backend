@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 using Amazon.S3;
 using FluentValidation;
 using InspecaoVeicularPetroeng.API.Pipelines;
+using InspecaoVeicularPetroeng.API.Services;
 using InspecaoVeicularPetroeng.Mediator.Extensions;
 using InspecaoVeicularPetroeng.Mediator.Interfaces;
 using Microsoft.AspNetCore.Localization;
@@ -25,6 +26,7 @@ public static class ApiConfig
             .AddJsonOptions(opt => opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
         services.AddHttpContextAccessor();
         services.AddHttpClient();
+        services.AddScoped<ICurrentUserService, CurrentUserService>();
         services.AddMediator([assembly]);
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
