@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace InspecaoVeicularPetroeng.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260316232859_projeto_iniciado")]
+    [Migration("20260320140952_projeto_iniciado")]
     partial class projeto_iniciado
     {
         /// <inheritdoc />
@@ -24,6 +24,30 @@ namespace InspecaoVeicularPetroeng.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("InspecaoVeicularPetroeng.Domain.Entities.Contrato", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("nome");
+
+                    b.HasKey("Id")
+                        .HasName("p_k_contratos");
+
+                    b.HasIndex("Nome")
+                        .IsUnique();
+
+                    b.ToTable("contratos", (string)null);
+                });
 
             modelBuilder.Entity("InspecaoVeicularPetroeng.Domain.Entities.Evidencia", b =>
                 {
@@ -179,6 +203,10 @@ namespace InspecaoVeicularPetroeng.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
+                    b.Property<int>("ContratoId")
+                        .HasColumnType("integer")
+                        .HasColumnName("contrato_id");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -210,6 +238,9 @@ namespace InspecaoVeicularPetroeng.Infrastructure.Migrations
                     b.HasKey("Id")
                         .HasName("p_k_usuarios");
 
+                    b.HasIndex("ContratoId")
+                        .HasDatabaseName("i_x_usuarios_contrato_id");
+
                     b.HasIndex("Email")
                         .IsUnique();
 
@@ -229,6 +260,10 @@ namespace InspecaoVeicularPetroeng.Infrastructure.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("ano");
 
+                    b.Property<int>("ContratoId")
+                        .HasColumnType("integer")
+                        .HasColumnName("contrato_id");
+
                     b.Property<string>("Modelo")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -243,6 +278,9 @@ namespace InspecaoVeicularPetroeng.Infrastructure.Migrations
 
                     b.HasKey("Id")
                         .HasName("p_k_veiculos");
+
+                    b.HasIndex("ContratoId")
+                        .HasDatabaseName("i_x_veiculos_contrato_id");
 
                     b.HasIndex("Placa")
                         .IsUnique();
@@ -326,6 +364,28 @@ namespace InspecaoVeicularPetroeng.Infrastructure.Migrations
                     b.Navigation("Vistoria");
                 });
 
+            modelBuilder.Entity("InspecaoVeicularPetroeng.Domain.Entities.Usuario", b =>
+                {
+                    b.HasOne("InspecaoVeicularPetroeng.Domain.Entities.Contrato", "Contrato")
+                        .WithMany("Usuarios")
+                        .HasForeignKey("ContratoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Contrato");
+                });
+
+            modelBuilder.Entity("InspecaoVeicularPetroeng.Domain.Entities.Veiculo", b =>
+                {
+                    b.HasOne("InspecaoVeicularPetroeng.Domain.Entities.Contrato", "Contrato")
+                        .WithMany("Veiculos")
+                        .HasForeignKey("ContratoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Contrato");
+                });
+
             modelBuilder.Entity("InspecaoVeicularPetroeng.Domain.Entities.Vistoria", b =>
                 {
                     b.HasOne("InspecaoVeicularPetroeng.Domain.Entities.Veiculo", "Veiculo")
@@ -335,6 +395,13 @@ namespace InspecaoVeicularPetroeng.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Veiculo");
+                });
+
+            modelBuilder.Entity("InspecaoVeicularPetroeng.Domain.Entities.Contrato", b =>
+                {
+                    b.Navigation("Usuarios");
+
+                    b.Navigation("Veiculos");
                 });
 
             modelBuilder.Entity("InspecaoVeicularPetroeng.Domain.Entities.Evidencia", b =>

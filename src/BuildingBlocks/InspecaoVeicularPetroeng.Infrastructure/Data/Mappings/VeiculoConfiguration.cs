@@ -35,5 +35,10 @@ public class VeiculoConfiguration : IEntityTypeConfiguration<Veiculo>
         builder
             .HasIndex(x => x.Placa)
             .IsUnique();
+
+        builder
+            .HasOne(x => x.Contrato)
+            .WithMany(x => x.Veiculos)
+            .HasForeignKey(x => x.ContratoId);
     }
 }

@@ -14,6 +14,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<Usuario> Usuarios { get; set; }
     public DbSet<Veiculo> Veiculos { get; set; }
     public DbSet<Vistoria> Vistorias { get; set; }
+    public DbSet<Contrato> Contratos { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

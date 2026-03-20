@@ -45,5 +45,10 @@ public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
         builder
             .HasIndex(x => x.Email)
             .IsUnique();
+
+        builder
+            .HasOne(x => x.Contrato)
+            .WithMany(x => x.Usuarios)
+            .HasForeignKey(x => x.ContratoId);
     }
 }

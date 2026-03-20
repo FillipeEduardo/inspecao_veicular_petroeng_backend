@@ -7,4 +7,6 @@ public class Veiculo
     public int Ano { get; set; }
     public string Modelo { get; set; } = string.Empty;
     public List<Vistoria>? Vistorias { get; set; }
+    public int ContratoId { get; set; }
+    public Contrato Contrato { get; set; } = null!;
 }

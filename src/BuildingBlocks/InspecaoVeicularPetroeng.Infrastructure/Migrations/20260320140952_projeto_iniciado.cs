@@ -13,6 +13,19 @@ namespace InspecaoVeicularPetroeng.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "contratos",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    nome = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("p_k_contratos", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "evidencias",
                 columns: table => new
                 {
@@ -61,11 +74,18 @@ namespace InspecaoVeicularPetroeng.Infrastructure.Migrations
                     senha = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     nome_completo = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     telefone = table.Column<string>(type: "character varying(11)", maxLength: 11, nullable: false),
-                    perfil = table.Column<int>(type: "integer", nullable: false)
+                    perfil = table.Column<int>(type: "integer", nullable: false),
+                    contrato_id = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("p_k_usuarios", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_usuarios_contratos_contrato_id",
+                        column: x => x.contrato_id,
+                        principalTable: "contratos",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -76,11 +96,18 @@ namespace InspecaoVeicularPetroeng.Infrastructure.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     placa = table.Column<string>(type: "character varying(7)", maxLength: 7, nullable: false),
                     ano = table.Column<int>(type: "integer", nullable: false),
-                    modelo = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false)
+                    modelo = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    contrato_id = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("p_k_veiculos", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_veiculos_contratos_contrato_id",
+                        column: x => x.contrato_id,
+                        principalTable: "contratos",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -165,6 +192,12 @@ namespace InspecaoVeicularPetroeng.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_contratos_nome",
+                table: "contratos",
+                column: "nome",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_evidencias_nome",
                 table: "evidencias",
                 column: "nome",
@@ -208,10 +241,20 @@ namespace InspecaoVeicularPetroeng.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "i_x_usuarios_contrato_id",
+                table: "usuarios",
+                column: "contrato_id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_usuarios_email",
                 table: "usuarios",
                 column: "email",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "i_x_veiculos_contrato_id",
+                table: "veiculos",
+                column: "contrato_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_veiculos_placa",
@@ -251,6 +294,9 @@ namespace InspecaoVeicularPetroeng.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "veiculos");
+
+            migrationBuilder.DropTable(
+                name: "contratos");
         }
     }
 }
