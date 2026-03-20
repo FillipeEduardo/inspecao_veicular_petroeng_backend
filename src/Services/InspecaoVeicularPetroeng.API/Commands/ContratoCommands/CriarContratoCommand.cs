@@ -28,7 +28,7 @@ public class CriarContratoCommandHandler(AppDbContext context) : IRequestHandler
         var jaExisteContratoComEsseNome =
             await context.Contratos.AnyAsync(x => x.Nome == novoContrato.Nome, cancellationToken);
         if (jaExisteContratoComEsseNome)
-            return new ErrorResult(["Ja Existe um contrato com esse nome"], HttpStatusCode.BadRequest);
+            return new ErrorResult(["Ja Existe um contrato com esse nome."], HttpStatusCode.BadRequest);
 
         await context.AddAsync(novoContrato, cancellationToken);
         await context.SaveChangesAsync(cancellationToken);
