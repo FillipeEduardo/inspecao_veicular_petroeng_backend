@@ -1,5 +1,5 @@
-﻿using InspecaoVeicularPetroeng.API.Commands.Veiculo;
-using InspecaoVeicularPetroeng.API.Queries.Veiculo;
+﻿using InspecaoVeicularPetroeng.API.Commands.VeiculoCommands;
+using InspecaoVeicularPetroeng.API.Queries.VeiculoQueries;
 using InspecaoVeicularPetroeng.Mediator.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

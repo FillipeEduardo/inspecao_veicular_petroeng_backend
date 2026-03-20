@@ -5,7 +5,7 @@ using InspecaoVeicularPetroeng.Infrastructure.Data;
 using InspecaoVeicularPetroeng.Mediator.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace InspecaoVeicularPetroeng.API.Commands.Vistoria;
+namespace InspecaoVeicularPetroeng.API.Commands.VistoriaCommands;
 
 public class CriarVistoriaCommand : IRequest<Result>
 {
@@ -14,9 +14,9 @@ public class CriarVistoriaCommand : IRequest<Result>
     public int VeiculoId { get; set; }
     public List<InspecaoDto> Inspecoes { get; set; } = [];
 
-    public static implicit operator Domain.Entities.Vistoria(CriarVistoriaCommand command)
+    public static implicit operator Vistoria(CriarVistoriaCommand command)
     {
-        return new Domain.Entities.Vistoria
+        return new Vistoria
         {
             VeiculoId = command.VeiculoId,
             Data = command.Data,
@@ -62,7 +62,7 @@ public class CriarVistoriaCommandHandler(AppDbContext context) : IRequestHandler
         var esseVeiculoExiste = await context.Veiculos.AnyAsync(x => x.Id == request.VeiculoId, cancellationToken);
         if (!esseVeiculoExiste) return new ErrorResult(["Esse veículo não existe."], HttpStatusCode.BadRequest);
 
-        Domain.Entities.Vistoria vistoria = request;
+        Vistoria vistoria = request;
 
         await context.AddAsync(vistoria, cancellationToken);
         await context.SaveChangesAsync(cancellationToken);

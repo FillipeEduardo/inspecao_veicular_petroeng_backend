@@ -2,12 +2,13 @@
 using Amazon.S3;
 using Amazon.S3.Model;
 using InspecaoVeicularPetroeng.API.Helpers;
+using InspecaoVeicularPetroeng.Domain.Entities;
 using InspecaoVeicularPetroeng.Domain.Results;
 using InspecaoVeicularPetroeng.Infrastructure.Data;
 using InspecaoVeicularPetroeng.Mediator.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace InspecaoVeicularPetroeng.API.Commands.Foto;
+namespace InspecaoVeicularPetroeng.API.Commands.FotoCommands;
 
 public class CriarFotoCommand : IRequest<Result>
 {
@@ -15,9 +16,9 @@ public class CriarFotoCommand : IRequest<Result>
     public long VistoriaId { get; set; }
     public int EvidenciaId { get; set; }
 
-    public static implicit operator Domain.Entities.Foto(CriarFotoCommand command)
+    public static implicit operator Foto(CriarFotoCommand command)
     {
-        return new Domain.Entities.Foto
+        return new Foto
         {
             EvidenciaId = command.EvidenciaId,
             Extensao = Path.GetExtension(command.Foto.FileName),
@@ -44,7 +45,7 @@ public class CriarFotoCommandHandler(AppDbContext context, IAmazonS3 amazon) : I
         if (fotoExistente)
             return new ErrorResult(["Já foi cadastrado uma foto para essa evidência."], HttpStatusCode.BadGateway);
 
-        Domain.Entities.Foto foto = request;
+        Foto foto = request;
         await context.AddAsync(foto, cancellationToken);
         await context.SaveChangesAsync(cancellationToken);
 

@@ -1,5 +1,5 @@
-﻿using InspecaoVeicularPetroeng.API.Commands.Vistoria;
-using InspecaoVeicularPetroeng.API.Queries.Vistoria;
+﻿using InspecaoVeicularPetroeng.API.Commands.VistoriaCommands;
+using InspecaoVeicularPetroeng.API.Queries.VistoriaQueries;
 using InspecaoVeicularPetroeng.Mediator.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

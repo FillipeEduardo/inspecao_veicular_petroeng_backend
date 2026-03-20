@@ -5,7 +5,7 @@ using InspecaoVeicularPetroeng.Infrastructure.Data;
 using InspecaoVeicularPetroeng.Mediator.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace InspecaoVeicularPetroeng.API.Commands.Auth;
+namespace InspecaoVeicularPetroeng.API.Commands.AuthCommands;
 
 public class LoginCommand : IRequest<Result>
 {
@@ -23,7 +23,7 @@ public class LoginCommandHandler(AppDbContext context) : IRequestHandler<LoginCo
         if (usuario is null || !await Hashing.VerifyPassword(request.Senha, usuario.Senha))
             return new ErrorResult([MensagemError], HttpStatusCode.BadRequest);
 
-        var token = Helpers.Auth.GenerateToken(usuario);
+        var token = Auth.GenerateToken(usuario);
         return new SuccessResult("Token gerado com sucesso.", HttpStatusCode.OK, token);
     }
 }

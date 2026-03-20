@@ -1,4 +1,4 @@
-﻿using InspecaoVeicularPetroeng.API.Queries.Evidencia;
+﻿using InspecaoVeicularPetroeng.API.Queries.EvidenciaQueries;
 using InspecaoVeicularPetroeng.Mediator.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -6,7 +6,7 @@ using InspecaoVeicularPetroeng.Domain.Results;
 using InspecaoVeicularPetroeng.Infrastructure.Data;
 using InspecaoVeicularPetroeng.Mediator.Interfaces;
 
-namespace InspecaoVeicularPetroeng.API.Commands.Auth;
+namespace InspecaoVeicularPetroeng.API.Commands.AuthCommands;
 
 public class CriarUsuarioCommand : IRequest<Result>
 {

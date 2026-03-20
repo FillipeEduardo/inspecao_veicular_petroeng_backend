@@ -1,4 +1,4 @@
-﻿using InspecaoVeicularPetroeng.API.Queries;
+﻿using InspecaoVeicularPetroeng.API.Queries.StatusInspecaoQueries;
 using InspecaoVeicularPetroeng.Mediator.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

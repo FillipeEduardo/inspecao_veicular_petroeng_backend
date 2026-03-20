@@ -4,7 +4,7 @@ using InspecaoVeicularPetroeng.Infrastructure.Data;
 using InspecaoVeicularPetroeng.Mediator.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace InspecaoVeicularPetroeng.API.Queries.Vistoria;
+namespace InspecaoVeicularPetroeng.API.Queries.VistoriaQueries;
 
 public class ObterTodasVistoriasQuery : IRequest<Result>
 {

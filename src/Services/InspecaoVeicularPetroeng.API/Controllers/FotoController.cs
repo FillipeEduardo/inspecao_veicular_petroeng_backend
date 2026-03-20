@@ -1,4 +1,4 @@
-﻿using InspecaoVeicularPetroeng.API.Commands.Foto;
+﻿using InspecaoVeicularPetroeng.API.Commands.FotoCommands;
 using InspecaoVeicularPetroeng.Mediator.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

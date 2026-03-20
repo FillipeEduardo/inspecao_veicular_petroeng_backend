@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
-using InspecaoVeicularPetroeng.API.Commands.Vistoria;
+using InspecaoVeicularPetroeng.API.Commands.VistoriaCommands;
 
-namespace InspecaoVeicularPetroeng.API.Validators.Vistoria;
+namespace InspecaoVeicularPetroeng.API.Validators.VistoriaValidators;
 
 public class CriarVistoriaCommandValidator : AbstractValidator<CriarVistoriaCommand>
 {

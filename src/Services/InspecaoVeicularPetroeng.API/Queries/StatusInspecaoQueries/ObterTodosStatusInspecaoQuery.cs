@@ -4,7 +4,7 @@ using InspecaoVeicularPetroeng.Infrastructure.Data;
 using InspecaoVeicularPetroeng.Mediator.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace InspecaoVeicularPetroeng.API.Queries;
+namespace InspecaoVeicularPetroeng.API.Queries.StatusInspecaoQueries;
 
 public class ObterTodosStatusInspecaoQuery : IRequest<Result>
 {
