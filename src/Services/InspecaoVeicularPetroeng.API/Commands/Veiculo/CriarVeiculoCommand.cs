@@ -36,6 +36,6 @@ public class CriarVeiculoCommandHandler(AppDbContext context) : IRequestHandler<
         await context.AddAsync(novoVeiculo, cancellationToken);
         await context.SaveChangesAsync(cancellationToken);
 
-        return new SuccessResult("Veículo criado com sucesso.", HttpStatusCode.OK);
+        return new SuccessResult("Veículo criado com sucesso.", HttpStatusCode.OK, novoVeiculo.Id);
     }
 }

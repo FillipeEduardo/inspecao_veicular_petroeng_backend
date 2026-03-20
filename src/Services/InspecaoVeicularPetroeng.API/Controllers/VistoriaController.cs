@@ -1,4 +1,5 @@
 ﻿using InspecaoVeicularPetroeng.API.Commands.Vistoria;
+using InspecaoVeicularPetroeng.API.Queries.Vistoria;
 using InspecaoVeicularPetroeng.Mediator.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +13,16 @@ public class VistoriaController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> Criar(CriarVistoriaCommand command)
     {
         var result = await mediator.Send(command);
+        return new ObjectResult(result)
+        {
+            StatusCode = (int)result.HttpStatusCode
+        };
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Todos([FromQuery] ObterTodasVistoriasQuery query)
+    {
+        var result = await mediator.Send(query);
         return new ObjectResult(result)
         {
             StatusCode = (int)result.HttpStatusCode
