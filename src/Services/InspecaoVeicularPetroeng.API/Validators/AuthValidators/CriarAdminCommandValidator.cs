@@ -3,9 +3,9 @@ using InspecaoVeicularPetroeng.API.Commands.AuthCommands;
 
 namespace InspecaoVeicularPetroeng.API.Validators.AuthValidators;
 
-public class CriarUsuarioCommandValidator : AbstractValidator<CriarUsuarioCommand>
+public class CriarAdminCommandValidator : AbstractValidator<CriarAdminCommand>
 {
-    public CriarUsuarioCommandValidator()
+    public CriarAdminCommandValidator()
     {
         RuleFor(x => x.Email)
             .NotEmpty()

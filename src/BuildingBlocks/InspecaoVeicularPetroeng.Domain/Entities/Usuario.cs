@@ -10,6 +10,6 @@ public class Usuario
     public string NomeCompleto { get; set; } = string.Empty;
     public string Telefone { get; set; } = string.Empty;
     public Perfil Perfil { get; set; }
-    public int ContratoId { get; set; }
-    public Contrato Contrato { get; set; } = null!;
+    public int? ContratoId { get; set; }
+    public Contrato? Contrato { get; set; }
 }
