@@ -17,5 +17,9 @@ public class CriarVeiculoCommandValidator : AbstractValidator<CriarVeiculoComman
         RuleFor(x => x.Modelo)
             .NotEmpty()
             .MaximumLength(50);
+
+        RuleFor(x => x.ContratoId)
+            .NotEmpty()
+            .GreaterThanOrEqualTo(1);
     }
 }

@@ -12,6 +12,7 @@ public class CriarVeiculoCommand : IRequest<Result>
     public string Placa { get; set; } = string.Empty;
     public int Ano { get; set; }
     public string Modelo { get; set; } = string.Empty;
+    public int ContratoId { get; set; }
 
     public static implicit operator Veiculo(CriarVeiculoCommand command)
     {
@@ -19,7 +20,8 @@ public class CriarVeiculoCommand : IRequest<Result>
         {
             Placa = command.Placa,
             Ano = command.Ano,
-            Modelo = command.Modelo.Trim()
+            Modelo = command.Modelo.Trim(),
+            ContratoId = command.ContratoId
         };
     }
 }
@@ -31,6 +33,10 @@ public class CriarVeiculoCommandHandler(AppDbContext context) : IRequestHandler<
         var jaExisteEsseVeiculo = await context.Veiculos.AnyAsync(v => v.Placa == request.Placa, cancellationToken);
         if (jaExisteEsseVeiculo)
             return new ErrorResult(["Um veículo com essa placa ja existe."], HttpStatusCode.BadRequest);
+
+        var contratoExiste = await context.Contratos.AnyAsync(x => x.Id == request.ContratoId, cancellationToken);
+        if (!contratoExiste)
+            return new ErrorResult(["O contrato informado não existe."], HttpStatusCode.BadRequest);
 
         Veiculo novoVeiculo = request;
 
