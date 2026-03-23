@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Text;
 using InspecaoVeicularPetroeng.Domain.Entities;
+using InspecaoVeicularPetroeng.Domain.Enums;
 using Microsoft.IdentityModel.Tokens;
 
 namespace InspecaoVeicularPetroeng.API.Helpers;
@@ -30,6 +31,8 @@ public static class Auth
         ci.AddClaim(new Claim(ClaimTypes.Email, usuario.Email));
         ci.AddClaim(new Claim(ClaimTypes.Role, usuario.Perfil.ToString()));
         ci.AddClaim(new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()));
+        if (usuario is { Perfil: Perfil.Condutor })
+            ci.AddClaim(new Claim("contrato_id", usuario.ContratoId.ToString() ?? string.Empty));
         return ci;
     }
 }
